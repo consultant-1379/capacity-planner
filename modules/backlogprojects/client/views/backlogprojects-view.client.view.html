@@ -1,0 +1,31 @@
+<section>
+  <div class="page-header">
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+        <a class="btn btn-sm btn-primary" ui-sref="backlogprojects.edit({backlogprojectId: vm.backlogproject._id})">Edit</a>
+      </div>
+    </div>
+    <h1>Viewing project backlog item '{{ vm.backlogproject.name }}'</h1>
+  </div>
+  <fieldset disabled>
+    <div class="form-group">
+      <label>Project Backlog Name</label>
+      <p class="form-control-static">{{ vm.backlogproject.name }}</p>
+    </div>
+    <div class="form-group">
+      <label>Team</label>
+      <p class="form-control-static"><a ui-sref="teams.view({teamId: vm.team._id})">{{ vm.team.name }}</a></p>
+    </div>
+    <div class="form-group">
+      <label>Deployment Type</label>
+      <p class="form-control-static"><a ui-sref="deploymenttypes.view({deploymenttypeId: vm.deploymenttype._id})">{{ vm.deploymenttype.name }}</a></p>
+    </div>
+    <div class="form-group">
+      <label>Associated Plans</label>
+      <p class="form-control-static" ng-if="plan.backlogprojectId === vm.backlogproject._id && vm.associatedPlans.length" ng-repeat="plan in vm.associatedPlans">
+        <a ui-sref="plans.edit({planId: plan._id})">{{ plan.name }} : {{ plan.pod_name }}</a>
+        <p ng-if="!vm.associatedPlans.length">None</p>
+      </p>
+    </div>
+  </fieldset>
+</section>

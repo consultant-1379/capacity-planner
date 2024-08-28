@@ -1,0 +1,66 @@
+{
+  "paths": {
+    "/auth/signin": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Sign in a user.",
+        "description": "Signs in a given user.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Username and password",
+            "required": true,
+            "schema":{
+              "$ref": "#/definitions/Auth"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Signed in User successfully."
+          },
+          "400": {
+            "description": "User doesn't exist."
+          },
+          "422": {
+            "description": "Invalid Username or password"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/signout":{
+      "get":{
+        "tags": [
+          "auth"
+        ],
+        "summary": "Signs out the given user.",
+        "description": "Signs out a given user.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully signed out User"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

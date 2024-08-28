@@ -1,0 +1,45 @@
+version: '2'
+services:
+  nginx:
+    build: docker/nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - nodejs
+      - swagger
+      - helpdocs
+    volumes:
+     - ./docker/nginx/cap_development.conf:/etc/nginx/conf.d/default.conf
+  nodejs:
+    build: .
+    ports:
+     - "35729:35729"
+    environment:
+     - DB_1_PORT_27017_TCP_ADDR=mongodb
+    depends_on:
+     - mongodb
+    volumes:
+     - ./:/opt/mean.js
+     - nodejs_node_modules:/opt/mean.js/node_modules
+     - nodejs_public:/opt/mean.js/public
+  mongodb:
+    image: mongo:3.4.10
+    volumes:
+     - mongodb_data:/data/db
+     - mongodb_logs:/var/log/mongodb
+  swagger:
+    environment:
+     - API_URL=/apidocs/swagger.json
+    image: swaggerapi/swagger-ui:v3.1.7
+    volumes: ["./swagger.json:/usr/share/nginx/html/swagger.json"]
+  helpdocs:
+    build:
+      context: .
+      dockerfile: docker/helpdocs/Dockerfile
+
+
+volumes:
+  nodejs_node_modules:
+  nodejs_public:
+  mongodb_data:
+  mongodb_logs:

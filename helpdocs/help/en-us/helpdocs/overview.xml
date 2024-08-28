@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<concept id="Overview">
+    <title>Overview</title>
+    <conbody>
+        <lines>
+          The Capacity Planner is a tool that can be used to plan the design and layout of a cloud environment.
+          It works in conjunction with an importer that can be used to read the actual data from the cloud and populate the Capacity Planner with this data in near real-time.
+        </lines>
+        <p>
+          The goal of the tool is to allow the administrators to plan out how the cloud resources should be allocated,
+          taking into account variables such as iops, memory, cpus, cpu contention ratio etc, in the most efficient way possible.
+        </p>
+        <p>
+          The result should be more efficient and effective use of the cloud infrastructure.
+        </p>
+    </conbody>
+</concept>

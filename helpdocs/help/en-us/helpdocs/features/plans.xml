@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<task id="createPlan">
+  <title>Plans</title>
+  <taskbody>
+    <context>
+      <p>
+        A plan within the Capacity Planner is the primary feature in the tool.
+        This makes use of all the information entered in the other parts of the application
+        as mentioned in the above prerequisites to allow the user to plan out the allocation
+        of resources across the pods and how to make the best use of these resources. This involves
+        assigning projects to various pods and selecting the predefined deployment types for these projects.
+        The associated data-importer interactions also ensure that the actual real data taken from the clouds
+        themselves is used here.
+      </p>
+      <p><b>Objective</b></p>
+      <p>Use the Capacity Planner to create a plan for efficient cloud resource allocation</p>
+      <p>
+        <b>Outline</b>
+        <ol>
+          <li><xref href="#createPlan">Open the Create Plan View</xref></li>
+          <li><xref href="#checkPods">Check the information in each Pod</xref></li>
+          <li><xref href="#addProject">Add a Backlog Project to a Cloud Pod</xref></li>
+          <li><xref href="#checkResources">Ensure Pod can handle the assigned resources</xref></li>
+          <li><xref href="#updateCPUCR">Update CPU Contention Ratio</xref></li>
+          <li><xref href="#updatePhysicalCapacity">Update Physical Capacity</xref></li>
+          <li><xref href="#analyseAllocation">Analyse the Team Resource Allocation</xref></li>
+        </ol>
+      </p>
+    </context>
+    <prereq>
+      <p>To create a plan successfully the user must have the following:</p>
+      <ul>
+        <li>Relevant Cloud Pods already created in the tool</li>
+        <li>Relevant Projects already created in the tool</li>
+        <li>Relevant Deployment Types already created in the tool</li>
+        <li>Relevant Teams already created in the tool</li>
+      </ul>
+    </prereq>
+    <steps>
+      <step id="createPlan">
+        <cmd>Open the Create Plan View</cmd>
+        <info>
+          <p>Click the <b>Create new plan</b> button from the plans page.</p>
+        </info>
+      </step>
+      <step id="checkPods">
+        <cmd>Check the information in each Pod</cmd>
+        <info>
+          <p>
+            There will be a tab available for each Cloud Pod that is created with the Capacity Planner.
+            These will contain all the information regarding the resource plans for that Pod - including
+            the projects that are currently assigned to that Pod and, in turn, the deployment type.
+            This then allows the tool to calculate the delta between the resources that the Cloud Pod has available
+            and the resources required based on the project assigned to it.
+          </p>
+          <image href="/resources/images/plan/plan_pod_tabs.png" alt="Create Plan Tabs"/>
+        </info>
+      </step>
+      <step id="addProject">
+        <cmd>Add a Backlog Project to a Cloud Pod</cmd>
+        <info>
+          <p>Click the Backlog Projects <b>dropdown</b> menu as shown below</p>
+          <image href="/resources/images/plan/add_project_dropdown.png" alt="Add Project"/>
+          <p>
+            When you click the above dropdown you are presented with all the available
+            backlog project items. Select the required project and then click the add button.
+            The project will be added to the plan, as well as updating the total resources required for the Pod overall.
+          </p>
+        </info>
+      </step>
+      <step id="checkResources">
+        <cmd>Ensure Pod can handle the assigned resources</cmd>
+        <info>
+          <p>
+            The overall Pod resource summary can be seen in the image below.
+            This shows the Total Required(from the projects assigned in previous step) vs
+            the Physical Capacity of the Pod and highlights where there are extra resources available
+            as well as where there are not enough resources(like in the case of ENFS IOPS from the image below).
+          </p>
+          <image href="/resources/images/plan/resource_summary.png" alt="Resource Summary"/>
+        </info>
+      </step>
+      <step id="updateCPUCR">
+        <cmd>Update CPU Contention Ratio</cmd>
+        <info>
+          <p>
+            The CPU Contention Ratio can be edited on this page to show what affect this would
+            have on the vCPUs that are required by the associated projects. As you change it you
+            can see the value highlighted in the below image change as this is now the new number of CPUs
+            available based on the acceptable contention.
+          </p>
+          <image href="/resources/images/plan/cpu_contention.png" alt="CPU Contention"/>
+        </info>
+      </step>
+      <step id="updatePhysicalCapacity">
+        <cmd>Update Physical Capacity</cmd>
+        <info>
+          <p>
+            All of the values in the Physical Capacity row are also editable. This will not
+            update the actual values stored for the Cloud Pod. It can be used to trial what would happen
+            if you added more ENFS IOPS for example to the Cloud Pod before making the real update.
+            These ephemeral changes are useful in terms of planning out the cloud pods.
+          </p>
+          <image href="/resources/images/plan/update_capacity.png" alt="Physical Capacity"/>
+        </info>
+      </step>
+      <step id="analyseAllocation">
+        <cmd>Analyse the Team Resource Allocation</cmd>
+        <info>
+          <p>
+            This section shows the resource allocation on a team level. This section shows the teams'
+            resources across all the Cloud Pods so that the user can see how many resources a
+            particular team are assigned regardless of the cloud these resources are on. This can be
+            seen in the image below.
+          </p>
+          <image href="/resources/images/plan/team_resources.png" alt="Team Resources"/>
+        </info>
+      </step>
+    </steps>
+    <result>
+      <p>A New Plan is created in the Capacity Planner.</p>
+    </result>
+  </taskbody>
+</task>

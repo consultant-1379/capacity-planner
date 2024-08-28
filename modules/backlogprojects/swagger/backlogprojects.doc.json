@@ -1,0 +1,190 @@
+{
+  "paths": {
+    "/backlogprojects": {
+      "get": {
+        "tags": [
+          "backlogprojects"
+        ],
+        "summary": "Returns a list of all backlog projects.",
+        "description": "Returns a list of all backlog projects. This can be filtered by using the ?q=<key>=<value> and filter= syntax on the API Call",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BacklogProject"
+              }
+            }
+          },
+          "422": {
+            "description": "Improperly structured query. Make sure to use ?q=<key>=<value> syntax"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post":{
+        "tags": [
+          "backlogprojects"
+        ],
+        "summary": "Create a new backlog project.",
+        "description": "Creates and returns a new backlog project.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Backlog project object that represents your proposed OpenStack Project",
+            "required": true,
+            "schema":{
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created Backlog Project successfully."
+          },
+          "400": {
+            "description": "Possible Messages:\n* There was a syntax error found in your request, please make sure that it is valid and try again\n* {PATH} is not in schema and strict mode is set to throw\n* {PATH} is required"
+          },
+          "422": {
+            "description": "Field already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/backlogprojects/{backlogprojectId}":{
+      "get":{
+        "tags": [
+          "backlogprojects"
+        ],
+        "summary": "Returns a backlog project.",
+        "description": "Returns a backlog project. This can be filtered by using the ?q=<key>=<value> and filter= syntax on the API Call",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"backlogprojectId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the backlog project to retrieve",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Backlog Project",
+            "schema": {
+              "$ref": "#/definitions/BacklogProject"
+            }
+          },
+          "404":{
+            "description":"A backlog project with that id does not exist"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put":{
+        "tags": [
+          "backlogprojects"
+        ],
+        "summary": "Update a backlog project.",
+        "description": "Update a backlog project.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"backlogprojectId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the backlog project to update",
+              "type":"string"
+           },
+           {
+             "in": "body",
+             "name": "body",
+             "description":"Backlog project object that represents your proposed OpenStack Project",
+             "required": true,
+             "schema":{
+               "$ref": "#/definitions/BacklogProject"
+              }
+            }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Backlog Project",
+            "schema": {
+              "$ref": "#/definitions/BacklogProject"
+            }
+          },
+          "400": {
+            "description": "Possible Messages:\n* There was a syntax error found in your request, please make sure that it is valid and try again\n* {PATH} is not in schema and strict mode is set to throw\n* {PATH} is required"
+          },
+          "404":{
+            "description": "A backlog project with that id does not exist"
+          },
+          "422": {
+            "description": "Field already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete":{
+        "tags": [
+          "backlogprojects"
+        ],
+        "summary": "Delete a backlog project.",
+        "description": "Delete a backlog project.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"backlogprojectId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the backlog project to delete",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted Backlog Project",
+            "schema": {
+              "$ref": "#/definitions/BacklogProject"
+            }
+          },
+          "404":{
+            "description":"A backlog project with that id does not exist"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

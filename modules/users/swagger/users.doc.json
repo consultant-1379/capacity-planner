@@ -1,0 +1,152 @@
+{
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Returns a list of all users. Admin only",
+        "description": "Returns a list of all users. Requires admin permission",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "422":{
+            "description": "Failed to retrieve users."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/{userId}":{
+      "get":{
+        "tags": [
+          "users"
+        ],
+        "summary": "Returns the user from given userId. Admin only",
+        "description": "Returns the user from given userId. Requires admin permissions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"userId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the user to retrieve",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved User",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "404":{
+            "description":"A user with the given Id could not be found in the database"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put":{
+        "tags": [
+          "users"
+        ],
+        "summary": "Update your user profile. Admin: Update any user",
+        "description": "Update a user with given user id. Requires admin permission unless you are updating your own user.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"userId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the user to update",
+              "type":"string"
+           },
+           {
+             "in": "body",
+             "name": "body",
+             "description": "User object that represents your User<br>Partial update possible, not all fields in body required",
+             "required": true,
+             "schema":{
+               "$ref": "#/definitions/User"
+              }
+            }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated User",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400":{
+            "description":"Failed to login user."
+          },
+          "401":{
+            "description":"User is not signed in."
+          },
+          "422":{
+            "description": "Failed to save update to user."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete":{
+        "tags": [
+          "users"
+        ],
+        "summary": "Delete a user. Admin only",
+        "description": "Delete a user with given user id. Requires admin permission.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"userId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the user to delete",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted User",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "422":{
+            "description": "Cannot delete User"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

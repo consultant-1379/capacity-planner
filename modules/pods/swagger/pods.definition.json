@@ -1,0 +1,89 @@
+{
+  "definitions": {
+    "Pod": {
+      "type": "object",
+      "required": [
+        "name",
+        "authUrl",
+        "project",
+        "username",
+        "password",
+        "cpu",
+        "memory_mb",
+        "cinder_gb",
+        "cinder_iops",
+        "enfs_gb",
+        "enfs_iops",
+        "cpu_contention_ratio"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "note": "Name must be unique, Minimum of 5 characters, Maximum of 20 characters",
+          "example":"cloud4b",
+          "minLength": 5,
+          "maxLength": 20
+        },
+        "authUrl": {
+          "type": "string",
+          "note": "This must be a unique, valid OpenStack Authentication URL",
+          "example": "http://cloud4b.athtem.eei.ericsson.se:5000/v2"
+        },
+        "project": {
+          "type": "string",
+          "example": "cloud4b_stratus"
+        },
+        "username": {
+          "type": "string",
+          "example": "cloud_user"
+        },
+        "password": {
+          "type": "password",
+          "example": "********"
+        },
+        "cpu": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 20,
+          "minimum": 0
+        },
+        "memory_mb": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 20000,
+          "minimum": 0
+        },
+        "cinder_gb": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 30,
+          "minimum": 0
+        },
+        "cinder_iops": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 5000,
+          "minimum": 0
+        },
+        "enfs_gb": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 50,
+          "minimum": 0
+        },
+        "enfs_iops": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 1000,
+          "minimum": 0
+        },
+        "cpu_contention_ratio": {
+          "type": "double",
+          "note": "This must be a positive double",
+          "example": 2.5,
+          "minimum": 0.01
+        }
+      }
+    }
+  }
+}

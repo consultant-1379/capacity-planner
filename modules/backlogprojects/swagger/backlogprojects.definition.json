@@ -1,0 +1,32 @@
+{
+  "definitions": {
+    "BacklogProject":{
+      "type": "object",
+      "required": [
+        "name",
+        "team_id",
+        "deploymenttype_id"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example":"cloud4b_stratus"
+        },
+        "team_id": {
+          "type": "string",
+          "note": "ID of an existing Team  - 24 characters",
+          "example":"124325317647698765732135",
+          "minlength": 24,
+          "maxlength": 24
+        },
+        "deploymenttype_id": {
+          "type": "string",
+          "note": "ID of an existing DeploymentType - 24 characters",
+          "example":"124325317647698765732135",
+          "minlength": 24,
+          "maxlength": 24
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<task id="createPlanWithDeletedAndPerPlan">
+  <title>Deleted and Per Plan Projects</title>
+  <taskbody>
+    <context>
+      <p>
+        A deleted project within the Capacity Planner is a project that is currently in use in a pod but you wish to plan its removal.
+        A per plan project within the Capacity Planner is a project that has been planned to be removed from one pod and moved to another.
+      </p>
+      <p><b>Objective</b></p>
+      <p>Use the Capacity Planner to create or update a plan with deleted projects and per plan projects for efficient cloud resource allocation</p>
+      <p>
+        <b>Outline</b>
+        <ol>
+          <li><xref href="#openPlan">Open the Plan View</xref></li>
+          <li><xref href="#deleteAProject">Delete a Project from a Cloud Pod</xref></li>
+          <li><xref href="#perPlanProject">Reassign a deleted project</xref></li>
+        </ol>
+      </p>
+    </context>
+    <prereq>
+      <p>To create or update a plan successfully the user must have the following:</p>
+      <ul>
+        <li>Relevant Cloud Pods already created in the tool</li>
+        <li>Relevant Projects already created in the tool</li>
+        <li>Relevant Deployment Types already created in the tool</li>
+        <li>Relevant Teams already created in the tool</li>
+      </ul>
+    </prereq>
+    <steps>
+      <step id="openPlan">
+        <cmd>Open the Create Plan View</cmd>
+        <info>
+          <p>Click the <b>Create new plan</b> button from the plans page or click on the plan you wish to edit.</p>
+        </info>
+      </step>
+      <step id="deleteAProject">
+        <cmd>Delete a Project from a Cloud Pod</cmd>
+        <info>
+          <p>Click the <b>X</b> button on the project you wish to delete
+            When you click the button the project will become grey and the
+            <b>X</b> button will change to a <b>+</b> which will allow the project to be re-added to the plan.
+            This deleted project will be added to the per plan project list below the backlog prokect list.
+            The project can be re-added using this list.
+          </p>
+        </info>
+      </step>
+      <step id="perPlanProject">
+        <cmd>Reassign a deleted project</cmd>
+        <info>
+          <p>
+            Navigate to the pod you wish to add a project to.
+            From the per plan project list select the project you want to add.
+            When selected press the <b>+</b> button beside the list
+            This will add the project to the pod. The project will be highlighted to help differentiate it from the live projects.
+            Note: This project cannot be re-added in the original pod but will remain there greyed out till the project is removed from the new pod.
+          </p>
+        </info>
+      </step>
+    </steps>
+    <result>
+      <p>A Plan is created or updated with deleted projects and per plan projects in the Capacity Planner.</p>
+    </result>
+  </taskbody>
+</task>

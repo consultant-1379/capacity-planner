@@ -1,0 +1,25 @@
+<section>
+  <div class="page-header">
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+        <a class="btn btn-sm btn-primary" ui-sref="teams.edit({teamId: vm.team._id})">Edit</a>
+      </div>
+    </div>
+    <h1>Viewing team '{{ vm.team.name }}'</h1>
+  </div>
+  <form>
+    <fieldset disabled>
+      <div class="form-group">
+        <label>Name</label>
+        <p class="form-control-static">{{ vm.team.name }}</p>
+      </div>
+      <div class="form-group">
+        <label>Dependent Projects</label>
+        <p ng-if="!vm.dependentProjects.length">None</p>
+        <p ng-repeat="dependentProject in vm.dependentProjects">
+          <a ui-sref="projects.view({projectId: dependentProject._id})">{{ dependentProject.name }}</a>
+        </p>
+      </div>
+    </fieldset>
+  </form>
+</section>

@@ -1,0 +1,84 @@
+{
+  "definitions": {
+    "Plan": {
+      "type": "object",
+      "required": [
+        "name",
+        "pods",
+        "status"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "note": "Name must be unique, Maximum of 50 characters",
+          "example": "Stratus_Plan",
+          "maxLength": 50
+        },
+        "pods": {
+          "type": "array",
+          "note": "This must be an array of pods which will make up the available capacity",
+          "items": {
+            "$ref": "#/definitions/PodPlan"
+          }
+        },
+        "status": {
+          "type": "string",
+          "note": "This will be the status of the plan as set by the user",
+          "enum": [
+            "IN PROGRESS",
+            "READY"
+          ]
+        }
+      }
+    },
+    "PodPlan": {
+      "type": "object",
+      "required": [
+        "pod_id",
+        "backlog_project_ids"
+      ],
+      "properties": {
+        "pod_id": {
+          "type": "string",
+          "note": "ID of an existing pod - 24 characters",
+          "example":"124325317647698765732135",
+          "minlength": 24,
+          "maxlength": 24
+        },
+        "backlog_project_ids": {
+          "type": "array",
+          "note": "This must be an array of backlog project ids which will be planned for the corresponding pod",
+          "items": {
+            "type": "string",
+            "note": "ID of an existing backlog project - 24 characters",
+            "example":"124325317647698765732135",
+            "minlength": 24,
+            "maxlength": 24
+          }
+        },
+        "deleted_project_ids": {
+          "type": "array",
+          "note": "This must be an array of project ids which have been deleted from the corresponding pod",
+          "items": {
+            "type": "string",
+            "note": "ID of an existing project - 24 characters",
+            "example":"124325317647698765732135",
+            "minlength": 24,
+            "maxlength": 24
+          }
+        },
+        "per_plan_project_ids": {
+          "type": "array",
+          "note": "This must be an array of project ids which will be planned for the corresponding pod from the deleted projects from other pods",
+          "items": {
+            "type": "string",
+            "note": "ID of an existing project - 24 characters",
+            "example":"124325317647698765732135",
+            "minlength": 24,
+            "maxlength": 24
+          }
+        }
+      }
+    }
+  }
+}

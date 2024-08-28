@@ -1,0 +1,27 @@
+<div>
+  <h3 class="col-xs-12 text-center"></h3>
+  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+    <form name="vm.userForm" ng-submit="vm.signin()" class="signin" novalidate autocomplete="off">
+      <fieldset>
+        <div class="form-group has-feedback" ng-class="{ 'has-error': vm.userForm.username.$invalid, 'has-success': vm.userForm.username.$valid }">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" placeholder="Username" required autofocus>
+          <span class="help-block" ng-messages="vm.userForm.username.$error">
+            <p ng-message="required">This field is required</p>
+          </span>
+        </div>
+         <div class="form-group has-feedback" ng-class="{ 'has-error': vm.userForm.password.$invalid, 'has-success': vm.userForm.password.$valid }">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="Password" required>
+          <span class="help-block" ng-messages="vm.userForm.password.$error">
+            <p ng-message="required">This field is required</p>
+          </span>
+        </div>
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary" ng-disabled="!vm.userForm.$valid">Sign in</button>
+        </div>
+        <br />
+      </fieldset>
+    </form>
+  </div>
+</div>

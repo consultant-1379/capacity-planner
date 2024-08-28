@@ -1,0 +1,59 @@
+{
+  "definitions": {
+    "DeploymentType": {
+      "type": "object",
+      "required": [
+        "name",
+        "cpu",
+        "memory_mb",
+        "cinder_gb",
+        "cinder_iops",
+        "enfs_gb",
+        "enfs_iops"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "note": "Name must be unique, Maximum of 50 characters",
+          "example":"FeatureTest"
+        },
+        "cpu": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 20,
+          "minimum": 0
+        },
+        "memory_mb": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 20000,
+          "minimum": 0
+        },
+        "cinder_gb": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 30,
+          "minimum": 0
+        },
+        "cinder_iops": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 5000,
+          "minimum": 0
+        },
+        "enfs_gb": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 50,
+          "minimum": 0
+        },
+        "enfs_iops": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 1000,
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

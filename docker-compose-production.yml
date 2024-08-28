@@ -1,0 +1,41 @@
+version: '2'
+services:
+  nginx:
+    image: armdocker.rnd.ericsson.se/proj_openstack_tooling/cap_reverse_proxy:latest
+    restart: always
+    ports:
+      - "443:443"
+      - "80:80"
+    depends_on:
+      - nodejs
+      - swagger
+    volumes:
+      - ./config/sslcerts:/etc/nginx/certs
+  nodejs:
+    image: armdocker.rnd.ericsson.se/proj_openstack_tooling/capacity_planner:latest
+    restart: always
+    environment:
+     - DB_1_PORT_27017_TCP_ADDR=mongodb
+     - LDAP_URL=${LDAP_URL}
+     - SEARCH_FILTER=${SEARCH_FILTER}
+     - BASE_DN_LIST=${BASE_DN_LIST}
+    depends_on:
+     - mongodb
+  mongodb:
+    image: mongo:3.4.10
+    restart: always
+    volumes:
+     - mongodb_data:/data/db
+     - mongodb_logs:/var/log/mongodb
+  swagger:
+    image: armdocker.rnd.ericsson.se/proj_openstack_tooling/cap_api_docs:latest
+    restart: always
+    environment:
+     - API_URL=/apidocs/swagger.json
+  helpdocs:
+    image: armdocker.rnd.ericsson.se/proj_openstack_tooling/cap_help_docs:latest
+    restart: always
+
+volumes:
+  mongodb_data:
+  mongodb_logs:

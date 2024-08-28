@@ -1,0 +1,55 @@
+{
+  "definitions": {
+    "Project":{
+      "type": "object",
+      "required": [
+        "pod_id",
+        "team_id",
+        "deploymenttype_id",
+        "name",
+        "cpu",
+        "memory_mb",
+        "cinder_gb"
+      ],
+      "properties": {
+        "pod_id": {
+          "type": "string",
+          "note": "ID of an existing Pod  - 24 characters",
+          "example":"124325317647698765732135"
+        },
+        "team_id": {
+          "type": "string",
+          "note": "ID of an existing Team  - 24 characters",
+          "example":"124325317647698765732135"
+        },
+        "deploymenttype_id": {
+          "type": "string",
+          "note": "ID of an existing DeploymentType - 24 characters",
+          "example":"124325317647698765732135"
+        },
+        "name": {
+          "type": "string",
+          "example":"cloud4b_stratus"
+        },
+        "cpu": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 20,
+          "minimum": 0
+        },
+        "memory_mb": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 20000,
+          "minimum": 0
+        },
+        "cinder_gb": {
+          "type": "integer",
+          "note": "This must be a positive integer",
+          "example": 30,
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

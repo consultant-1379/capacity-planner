@@ -1,0 +1,42 @@
+FROM node:8.16.0-alpine
+
+# 80 = HTTP, 443 = HTTPS
+EXPOSE 80
+
+# Temporarily set development environment variable during build
+ENV NODE_ENV development
+
+# The node image has a very verbose logging level for npm, this sets it back to the default level
+ENV NPM_CONFIG_LOGLEVEL warn
+
+# Set the working directory
+WORKDIR /opt/mean.js
+
+# Copy the production files
+COPY server.js /opt/mean.js/
+COPY config/ /opt/mean.js/config/
+COPY modules/ /opt/mean.js/modules/
+COPY gulpfile.js .bowerrc bower.json /opt/mean.js/
+
+# Install the production packages
+COPY package.json /opt/mean.js/package.json
+RUN npm install \
+  && apk add --no-cache git \
+  && npm link bower \
+  && bower install --allow-root --config.interactive=false \
+  && bower cache clean --allow-root \
+  && apk del git \
+  && npm run-script build:prod \
+  && export NODE_ENV="production" \
+  && npm prune \
+  && npm uninstall --global bower \
+  && npm link pm2 \
+  && npm cache clean --force
+
+# Set production environment variable
+ENV NODE_ENV production
+
+# Add version file
+COPY VERSION /opt/mean.js/
+
+CMD pm2-docker start server.js

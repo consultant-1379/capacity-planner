@@ -1,0 +1,62 @@
+{
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "firstName",
+        "lastName",
+        "username",
+        "roles"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "default": "",
+          "example": "Sean"
+        },
+        "lastName": {
+          "type": "string",
+          "default": "",
+          "example": "Byrne"
+        },
+        "displayName": {
+          "type": "string",
+          "note": "Name to appear on UI"
+        },
+        "email": {
+          "type": "email",
+          "note": "Unique, valid Email Address",
+          "default": "",
+          "example": "test@test.com"
+        },
+        "username": {
+          "type": "string",
+          "note": "Unique username - 3+ chars, letters a-z, numbers 0-9, no consecutive dots, does not start or end with dots, no ', characters allowed - '_-.'",
+          "example": "eseabyr"
+        },
+        "password": {
+          "type": "password",
+          "note": "Hashed version stored in base64",
+          "default": ""
+        },
+        "salt": {
+          "type": "string"
+        },
+        "roles": {
+          "type": "array",
+          "note": "Options based on enum - user, admin",
+          "default": ["user"]
+        },
+        "updated": {
+          "type": "date",
+          "note": "Timestamp of last profile change"
+        },
+        "created": {
+          "type": "date",
+          "note": "Timestamp of user creation",
+          "default": "Date.now"
+        }
+      }
+    }
+  }
+}

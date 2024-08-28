@@ -1,0 +1,193 @@
+{
+  "paths": {
+    "/plans": {
+      "get": {
+        "tags": [
+          "plans"
+        ],
+        "summary": "Returns a list of all plans.",
+        "description": "Returns a list of all plans. This can be filtered by using the ?q=<key>=<value> and fields= syntax on the API Call",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Plan"
+              }
+            }
+          },
+          "422": {
+            "description": "Improperly structured query. Make sure to use ?q=<key>=<value> syntax"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post":{
+        "tags": [
+          "plans"
+        ],
+        "summary": "Create a new plan.",
+        "description": "Creates and returns a new plan.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Plan object that represents your Plan",
+            "required": true,
+            "schema":{
+              "$ref": "#/definitions/Plan"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created Plan successfully.",
+            "schema": {
+              "$ref": "#/definitions/Plan"
+            }
+          },
+          "400": {
+            "description": "Possible Messages:\n* There was a syntax error found in your request, please make sure that it is valid and try again\n* {PATH} is not in schema and strict mode is set to throw\n* Path {PATH} (`{VALUE}`) is longer than the maximum allowed length.\n* Cast to Array failed for value"
+          },
+          "422": {
+            "description": "Possible Messages:\n* Field already exists\n* The given pod id 000000000000000000000000 could not be found\n* {PATH} is required\n* {VALUE} is not a valid enum value for path {PATH}\n* The given pod id {VALUE} could not be found\n* There are duplicate project ids assigned to this plan \n* There are duplicate deleted project ids assigned to this plan \n* There are duplicate per plan project ids assigned to this plan\n* The given backlog project id {VALUE} could not be found\n* The given per plan project id {VALUE} could not be found\n* The given deleted project id {VALUE} could not be found\n* The given per plan project id {VALUE} should not belong in pod id {Value}\n* The given project id {VALUE} could not be found in pod id {VALUE}\n* The given per plan project id {VALUE} should exist in the deleted_project_ids of pod id {VALUE}"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/plans/{planId}":{
+      "get":{
+        "tags": [
+          "plans"
+        ],
+        "summary": "Returns a plan.",
+        "description": "Returns a plan. This can be filtered by using the ?q=<key>=<value> and field= syntax on the API Call",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"planId",
+              "in":"path",
+              "required": true,
+              "description":"The id of the plan to retrieve",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Plan",
+            "schema": {
+              "$ref": "#/definitions/Plan"
+            }
+          },
+          "404":{
+            "description":"A plan with that id does not exist"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put":{
+        "tags": [
+          "plans"
+        ],
+        "summary": "Update a plan.",
+        "description": "Update a plan.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"planId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the plan to update",
+              "type":"string"
+           },
+           {
+             "in": "body",
+             "name": "body",
+             "description": "Plan object that represents your Plan",
+             "required": true,
+             "schema":{
+               "$ref": "#/definitions/Plan"
+              }
+            }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Plan",
+            "schema": {
+              "$ref": "#/definitions/Plan"
+            }
+          },
+          "400": {
+            "description": "Possible Messages:\n* There was a syntax error found in your request, please make sure that it is valid and try again\n* {PATH} is not in schema and strict mode is set to throw\n* Path {PATH} (`{VALUE}`) is longer than the maximum allowed length.\n* Cast to Array failed for value"
+          },
+          "404":{
+            "description":"A plan with that id does not exist"
+          },
+          "422": {
+            "description": "Possible Messages:\n* Field already exists\n* The given pod id 000000000000000000000000 could not be found\n* {PATH} is required\n*  {VALUE} is not a valid enum value for path {PATH}\n* The given pod id {VALUE} could not be found\n* There are duplicate project ids assigned to this plan \n* There are duplicate deleted project ids assigned to this plan \n* There are duplicate per plan project ids assigned to this plan\n* The given backlog project id {VALUE} could not be found\n* The given per plan project id {VALUE} could not be found\n* The given deleted project id {VALUE} could not be found\n* The given per plan project id {VALUE} should not belong in pod id {Value}\n* The given project id {VALUE} could not be found in pod id {VALUE}\n* The given per plan project id {VALUE} should exist in the deleted_project_ids of pod id {VALUE}"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete":{
+        "tags": [
+          "plans"
+        ],
+        "summary": "Delete a plan.",
+        "description": "Delete a plan.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"planId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the plan to delete",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted Plan",
+            "schema": {
+              "$ref": "#/definitions/Plan"
+            }
+          },
+          "404":{
+            "description": "A plan with that id does not exist"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

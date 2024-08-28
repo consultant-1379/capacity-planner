@@ -1,0 +1,190 @@
+{
+  "paths": {
+    "/projects": {
+      "get": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Returns a list of all projects.",
+        "description": "Returns a list of all projects. This can be filtered by using the ?q=<key>=<value> and filter= syntax on the API Call",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Project"
+              }
+            }
+          },
+          "422": {
+            "description": "Improperly structured query. Make sure to use ?q=<key>=<value> syntax"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post":{
+        "tags": [
+          "projects"
+        ],
+        "summary": "Create a new project.",
+        "description": "Creates and returns a new project.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Project object that represents your OpenStack Project",
+            "required": true,
+            "schema":{
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created Project successfully."
+          },
+          "400": {
+            "description": "Possible Messages:\n* There was a syntax error found in your request, please make sure that it is valid and try again\n* {PATH} is not in schema and strict mode is set to throw\n* {PATH} is not valid, {VALUE} is not an integer\n* {PATH} is less than minimum allowed value (0)\n* {PATH} is required"
+          },
+          "422": {
+            "description": "Field already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}":{
+      "get":{
+        "tags": [
+          "projects"
+        ],
+        "summary": "Returns a project.",
+        "description": "Returns a project. This can be filtered by using the ?q=<key>=<value> and filter= syntax on the API Call",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"projectId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the project to retrieve",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Project",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "404":{
+            "description":"A project with that id does not exist"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put":{
+        "tags": [
+          "projects"
+        ],
+        "summary": "Update a project.",
+        "description": "Update a project.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"projectId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the project to update",
+              "type":"string"
+           },
+           {
+             "in": "body",
+             "name": "body",
+             "description":"Project object that represents your OpenStack Project <br>Partial update possible, not all fields in body required",
+             "required": true,
+             "schema":{
+               "$ref": "#/definitions/Project"
+              }
+            }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Project",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "400": {
+            "description": "Possible Messages:\n* There was a syntax error found in your request, please make sure that it is valid and try again\n* {PATH} is not in schema and strict mode is set to throw\n* {PATH} is not valid, {VALUE} is not an integer\n* {PATH} is less than minimum allowed value (0)\n* {PATH} is required"
+          },
+          "404":{
+            "description":"A project with that id does not exist"
+          },
+          "422": {
+            "description": "Field already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete":{
+        "tags": [
+          "projects"
+        ],
+        "summary": "Delete a project.",
+        "description": "Delete a project.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"projectId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the project to delete",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted Project",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "404":{
+            "description":"A project with that id does not exist"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

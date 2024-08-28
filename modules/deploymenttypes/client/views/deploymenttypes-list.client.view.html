@@ -1,0 +1,25 @@
+<section>
+  <div class="page-header">
+    <h1>Deployment Types</h1>
+  </div>
+  <div>There are {{ vm.deploymenttypes.length }} Deployment Types</div>
+  <br />
+  <a ui-sref="deploymenttypes.create" class="btn btn-sm btn-success">Create new Deployment Type</a>
+  <table ng-if="vm.deploymenttypes.length > 0" class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ui-sref="deploymenttypes.view({deploymenttypeId: deploymenttype._id})" ng-repeat="deploymenttype in vm.deploymenttypes" style="cursor: pointer">
+        <td>{{ deploymenttype.name }}</td>
+        <td stop-propagation>
+          <a class="btn btn-sm btn-primary" ui-sref="deploymenttypes.edit({deploymenttypeId: deploymenttype._id})">Edit</a>
+          <a class="btn btn-sm btn-danger" ng-click="vm.remove(deploymenttype)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

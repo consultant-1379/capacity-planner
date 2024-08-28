@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<task id="copyPlan">
+  <title>Copy Plan</title>
+  <taskbody>
+    <context>
+      <p><b>Objective</b></p>
+      <p>Copy an existing plan for the Capacity Planner</p>
+      <p>
+        <b>Outline</b>
+        <ol>
+          <li><xref href="#openPlan">Open the Plan View</xref></li>
+          <li><xref href="#createPod">Create New Pod</xref></li>
+          <li><xref href="#enterDetails">Enter the Pod Details</xref></li>
+          <li><xref href="#savePod">Save Pod</xref></li>
+        </ol>
+      </p>
+    </context>
+    <prereq>
+      <p>To copy a plan you must have an existing Plan you wish to copy</p>
+    </prereq>
+    <steps>
+      <step id="openPlan">
+        <cmd>Open the Plan View</cmd>
+        <info>
+          <p>Click the plan view from the nav bar at the top.</p>
+        </info>
+      </step>
+      <step id="copyPlan">
+        <cmd>Copy Existing Plan</cmd>
+        <info>
+          <p>Click the <b>Copy</b> button beside the Plan you wish to copy</p>
+        </info>
+      </step>
+      <step id="enterDetails">
+        <cmd>You will be prompted to enter new name for the Plan</cmd>
+        <info>
+          <p><b>NOTE:</b> <b>Name</b> must be unique and between 5 and 20 characters</p>
+        </info>
+      </step>
+      <step id="savePlan">
+        <cmd>Save Plan</cmd>
+        <info>
+          <p>Click the <b>OK</b> button and your Plan will be copied</p>
+        </info>
+      </step>
+    </steps>
+    <result>
+      <p>A new Plan is created from an existing Plan in the Capacity Planner.</p>
+    </result>
+  </taskbody>
+</task>

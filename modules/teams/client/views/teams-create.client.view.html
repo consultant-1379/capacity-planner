@@ -1,0 +1,20 @@
+<section>
+  <div class="page-header">
+    <h1>{{ vm.pageTitle }} '{{ vm.team.name }}'</h1>
+  </div>
+  <form name="form" ng-submit="vm.submitForm()">
+    <fieldset>
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.name.$invalid, 'has-success': form.name.$valid }">
+        <label for="name">Name</label>
+        <input class="form-control" type="text" id="name" name="name" placeholder="Name" ng-model="vm.team.name" ng-maxlength="50" required autofocus>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.name.$invalid, 'glyphicon-ok': form.name.$valid }"></span>
+        <span class="help-block" ng-messages="form.name.$error">
+          <p ng-message="required">This field is required</p>
+          <p ng-message="minlength">This must be at least of length 5</p>
+          <p ng-message="maxlength">This must be at most of length 20</p>
+        </span>
+      </div>
+    </fieldset>
+    <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid || vm.formSubmitting">Save</button>
+  </form>
+</section>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<concept id="Features">
+    <title>Features</title>
+    <conbody>
+        <section>
+            <p>These pages provide information on all of the features in the Capacity Planner</p>
+            <p>
+                <image href="/resources/images/common/tutorial.svg" alt="Tutorial" align="left"/>
+                <xref href="features/pods.xml" type="task">Pods</xref>
+            </p>
+            <p>
+                <image href="/resources/images/common/tutorial.svg" alt="Tutorial" align="left"/>
+                <xref href="features/projects.xml" type="task">Projects</xref>
+            </p>
+            <p>
+                <image href="/resources/images/common/tutorial.svg" alt="Tutorial" align="left"/>
+                <xref href="features/backlogProjects.xml" type="task">Backlog Projects</xref>
+            </p>
+            <p>
+                <image href="/resources/images/common/tutorial.svg" alt="Tutorial" align="left"/>
+                <xref href="features/teams.xml" type="task">Teams</xref>
+            </p>
+            <p>
+                <image href="/resources/images/common/tutorial.svg" alt="Tutorial" align="left"/>
+                <xref href="features/deploymentTypes.xml" type="task">Deployment Types</xref>
+            </p>
+            <p>
+                <image href="/resources/images/common/tutorial.svg" alt="Tutorial" align="left"/>
+                <xref href="features/plans.xml" type="task">Plans</xref>
+            </p>
+        </section>
+    </conbody>
+</concept>

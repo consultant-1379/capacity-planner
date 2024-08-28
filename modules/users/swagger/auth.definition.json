@@ -1,0 +1,22 @@
+{
+  "definitions": {
+    "Auth": {
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "note": "Unique username - 3+ chars, letters a-z, numbers 0-9, no consecutive dots, does not start or end with dots, no ', characters allowed - '_-.'",
+          "example": "eseabyr"
+        },
+        "password": {
+          "type": "password",
+          "note": "Hashed version stored in base64"
+        }
+      }
+    }
+  }
+}

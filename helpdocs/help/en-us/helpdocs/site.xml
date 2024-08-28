@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<site>
+    <title>Capacity Planner</title>
+    <homeTitle>Home</homeTitle>
+    <home>
+        <blocks>
+            <block color="purple" href="overview.xml">
+                <title>Overview</title>
+                <desc>Learn about the Capacity Planner.</desc>
+            </block>
+            <block color="green"  href="prerequisites.xml">
+                <title>Prerequisites</title>
+                <desc>Learn about the prerequisites for using the Capacity Planner.</desc>
+            </block>
+            <block color="blue" href="features.xml">
+                <title>Features</title>
+                <desc>Learn the key features of the Capacity Planner.</desc>
+            </block>
+            <block color="darkblue" href="/apidocs" scope="external">
+                <title>REST API Documentation</title>
+                <desc>Learn how to use the REST API for the Capacity Planner.</desc>
+            </block>
+        </blocks>
+    </home>
+</site>

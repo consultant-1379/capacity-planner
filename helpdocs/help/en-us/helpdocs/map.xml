@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<map>
+    <topicref href="overview.xml" navtitle="Overview" type="concept"/>
+    <topicref href="prerequisites.xml" navtitle="Prerequisites" type="concept"/>
+    <topicref href="features.xml" navtitle="Features">
+      <topicref href="features/pods.xml" navtitle="Pods" />
+      <topicref href="features/projects.xml" navtitle="Projects" />
+      <topicref href="features/backlogProjects.xml" navtitle="Backlog Projects" />
+      <topicref href="features/teams.xml" navtitle="Teams" />
+      <topicref href="features/deploymentTypes.xml" navtitle="Deployment Types" />
+      <topicref href="features/plans.xml" navtitle="Plans" />
+      <topicref href="features/copyPlan.xml" navtitle="Copy Plan" />
+      <topicref href="features/deletedAndPerPlanProjects.xml" navtitle="Deleted and Per Plan Projects"/>
+    </topicref>
+</map>

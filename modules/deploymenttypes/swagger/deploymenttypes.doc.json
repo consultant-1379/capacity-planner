@@ -1,0 +1,196 @@
+{
+  "paths": {
+    "/deploymenttypes": {
+      "get": {
+        "tags": [
+          "deploymenttypes"
+        ],
+        "summary": "Returns a list of all deployment types.",
+        "description": "Returns a list of all deployment types. This can be filtered by using the ?q=<key>=<value> and filter= syntax on the API Call",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeploymentType"
+              }
+            }
+          },
+          "422": {
+            "description": "Improperly structured query. Make sure to use ?q=<key>=<value> syntax"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post":{
+        "tags": [
+          "deploymenttypes"
+        ],
+        "summary": "Create a new deployment type.",
+        "description": "Creates and returns a new deployment type.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "DeploymentType object that represents your DeploymentType",
+            "required": true,
+            "schema":{
+              "$ref": "#/definitions/DeploymentType"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created DeploymentType successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentType"
+            }
+          },
+          "400": {
+            "description": "Possible Messages:\n* There was a syntax error found in your request, please make sure that it is valid and try again\n* {PATH} is not in schema and strict mode is set to throw\n* {PATH} is not valid, {VALUE} is not an integer\n* {PATH} is less than minimum allowed value (0)\n* {PATH} is required"
+          },
+          "422": {
+            "description": "Field already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/deploymenttypes/{deploymenttypeId}":{
+      "get":{
+        "tags": [
+          "deploymenttypes"
+        ],
+        "summary": "Returns a deployment type.",
+        "description": "Returns a deployment type. This can be filtered by using the ?q=<key>=<value> and filter= syntax on the API Call",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"deploymenttypeId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the deployment type to retrieve",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved DeploymentType",
+            "schema": {
+              "$ref": "#/definitions/DeploymentType"
+            }
+          },
+          "404":{
+            "description":"A DeploymentType with that id does not exist"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put":{
+        "tags": [
+          "deploymenttypes"
+        ],
+        "summary": "Update a deployment type.",
+        "description": "Update a deployment type.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"deploymenttypeId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the deployment type to update",
+              "type":"string"
+           },
+           {
+             "in": "body",
+             "name": "body",
+             "description": "DeploymentType object that represents your DeploymentType<br>Partial update possible, not all fields in body required",
+             "required": true,
+             "schema":{
+               "$ref": "#/definitions/DeploymentType"
+              }
+            }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated DeploymentType",
+            "schema": {
+              "$ref": "#/definitions/DeploymentType"
+            }
+          },
+          "400": {
+            "description": "Possible Messages:\n* There was a syntax error found in your request, please make sure that it is valid and try again\n* {PATH} is not in schema and strict mode is set to throw\n* {PATH} is not valid, {VALUE} is not an integer\n* {PATH} is less than minimum allowed value (0)\n* {PATH} is required"
+          },
+          "404":{
+            "description":"A DeploymentType with that id does not exist"
+          },
+          "422": {
+            "description": "Field already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete":{
+        "tags": [
+          "deploymenttypes"
+        ],
+        "summary": "Delete a deployment type.",
+        "description": "Delete a deployment type.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"deploymenttypeId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the deployment type to delete",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted DeploymentType",
+            "schema": {
+              "$ref": "#/definitions/DeploymentType"
+            }
+          },
+          "404":{
+            "description": "A DeploymentType with that id does not exist"
+          },
+          "422":{
+            "description": "Cannot delete DeploymentType with dependent objects"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

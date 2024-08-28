@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<task id="teams">
+  <title>Teams</title>
+  <taskbody>
+    <context>
+      <p><b>Objective</b></p>
+      <p>Create a new team for the Capacity Planner</p>
+      <p>
+        <b>Outline</b>
+        <ol>
+          <li><xref href="#openTeam">Open the Team View</xref></li>
+          <li><xref href="#createTeam">Create New Team</xref></li>
+          <li><xref href="#enterDetails">Enter the Team Details</xref></li>
+          <li><xref href="#saveTeam">Save Team</xref></li>
+        </ol>
+      </p>
+    </context>
+    <steps>
+      <step id="openTeam">
+        <cmd>Open the Team View</cmd>
+        <info>
+          <p>Click the team view from the nav bar at the top.</p>
+        </info>
+      </step>
+      <step id="createTeam">
+        <cmd>Create New Team</cmd>
+        <info>
+          <p>Click the <b>Create new team</b> button</p>
+        </info>
+      </step>
+      <step id="enterDetails">
+        <cmd>Enter the Team Details</cmd>
+        <info>
+          <p>Enter the team name in the input box.</p>
+          <p><b>NOTE:</b> Team names cannot exceed 50 characters</p>
+        </info>
+      </step>
+      <step id="saveTeam">
+        <cmd>Save Team</cmd>
+        <info>
+          <p>
+            Click the <b>Save</b> button and you will be redirected back to the previous page
+            where you can see the newly created team with new options to edit and delete that team.
+          </p>
+          <p><b>NOTE:</b> Team will not save if any fields are invalid (RED in UI)</p>
+        </info>
+      </step>
+    </steps>
+    <result>
+      <p>A New Team is created in the Capacity Planner.</p>
+    </result>
+  </taskbody>
+</task>

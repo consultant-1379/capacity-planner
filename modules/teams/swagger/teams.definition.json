@@ -1,0 +1,18 @@
+{
+  "definitions": {
+    "Team": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "note": "Name must be unique, Maximum of 50 characters",
+          "maxlength": 50,
+          "example": "Stratus"
+        }
+      }
+    }
+  }
+}

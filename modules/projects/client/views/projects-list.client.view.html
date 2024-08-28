@@ -1,0 +1,27 @@
+<section>
+  <div class="page-header">
+    <h1>Projects</h1>
+  </div>
+  <div>There are {{ vm.projects.length }} Projects</div>
+  <br />
+  <a ui-sref="projects.create" class="btn btn-sm btn-success">Create new Project</a>
+  <table ng-if="vm.projects.length > 0" class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Related Pod</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ui-sref="projects.view({projectId: project._id})" ng-repeat="project in vm.projects" style="cursor: pointer">
+        <td>{{ project.name }}</td>
+        <td ng-repeat="pod in vm.pods" ng-if="pod._id == project.pod_id">{{ pod.name }}</td>
+        <td stop-propagation>
+          <a class="btn btn-sm btn-primary" ui-sref="projects.edit({projectId: project._id})">Edit</a>
+          <a class="btn btn-sm btn-danger" ng-click="vm.remove(project)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

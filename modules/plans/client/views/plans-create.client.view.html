@@ -1,0 +1,179 @@
+<section>
+  <form name="form" ng-submit="vm.submitForm()">
+    <div class="form-group has-feedback" ng-class="{ 'has-error': form.name.$invalid, 'has-success': form.name.$valid }">
+      <label for="name">Plan Name</label>
+      <input class="form-control" type="text" id="name" name="name" placeholder="Plan Name" ng-model="vm.plan.name" ng-maxlength="50" required autofocus>
+      <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.name.$invalid, 'glyphicon-ok': form.name.$valid }"></span>
+      <span class="help-block" ng-messages="form.name.$error">
+        <p ng-message="required">This field is required</p>
+        <p ng-message="maxlength">This must be at most of length 50</p>
+      </span>
+    </div>
+    <div class="form-group has-feedback" ng-class="{ 'has-error': form.status.$invalid, 'has-success': form.status.$valid }">
+      <label for="status">Plan Status</label>
+      <select class="form-control" id="status" name="status" ng-model="vm.plan.status" ng-options="status as status for status in vm.statuses" required></select>
+      <span class="help-block" ng-messages="form.status.$error">
+        <p ng-message="required">This field is required</p>
+      </span>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">Resources Per Cloud</div>
+      <div class="panel-body">
+        <uib-tabset active="active">
+          <uib-tab index="$index" ng-repeat="pod in vm.pods" heading="{{pod.name}}">
+            <br>
+            <div class="panel panel-default">
+              <div class="panel-heading">{{ pod.name }} Resources Per Project</div>
+              <div class="panel-body">
+                <table class="table table-bordered table-striped">
+                  <caption></caption>
+                  <thead>
+                    <tr>
+                      <th>Project</th>
+                      <th>Team</th>
+                      <th>Deployment Type</th>
+                      <th ng-repeat="field in vm.fields">{{ field.title }}</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="project in vm.projects track by $index" ng-if="project.pod_id === pod._id" ng-style="{'background-color': vm.isProjectDeleted(project, pod) ? 'LightGrey ' : ''}">
+                      <td><b>{{ project.name }}</b></td>
+                      <td><div ng-repeat="team in vm.teams" ng-if="team._id === project.team_id">{{ team.name }}</div></td>
+                      <td>
+                        <div class="form-group">
+                          <select class="form-control" ng-model="project.deploymenttype_id" ng-options="deployment_type._id as deployment_type.name for deployment_type in vm.deploymentTypes" ng-change="vm.changedProjectDeploymentType(pod, project)" required></select>
+                        </div>
+                      </td>
+                      <td ng-repeat="field in vm.fields">
+                        <div ng-repeat="deploymentType in vm.deploymentTypes" ng-if="deploymentType._id === project.deploymenttype_id">{{ deploymentType[field.name] }}<p style="color: red" ng-if="project[field.name] != null && deploymentType[field.name] != project[field.name]">{{ project[field.name] }} allocated</p></div>
+                      </td>
+                      <td>
+                        <span class="input-group-btn">
+                          <a ui-sref="projects.edit({projectId: project._id})"   type="button" class="btn btn-default btn-sm" target="_blank" title="Edit Project In Another Tab"><i class="glyphicon glyphicon-edit"></i></a>
+                          <a ng-click="vm.reAddProject(pod, project)" ng-if="vm.isProjectDeleted(project, pod)" type="button" class="btn btn-default btn-sm" title="Re-Add Project"><i class="glyphicon glyphicon-plus"></i></a>
+                          <a ng-click="vm.removeProject(pod, project)" ng-if="!vm.isProjectDeleted(project, pod)" type="button" class="btn btn-default btn-sm" title="Remove Project"><i class="glyphicon glyphicon-remove"></i></a>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr ng-repeat="backlogproject in vm.backlogprojects" ng-if="vm.isBacklogProjectInPodPlan(pod, backlogproject)" class="info">
+                      <td><b>{{ backlogproject.name }}</b></td>
+                      <td><div ng-repeat="team in vm.teams" ng-if="team._id === backlogproject.team_id ">{{ team.name }}</div></td>
+                      <td>
+                        <div ng-repeat="deployment_type in vm.deploymentTypes" ng-if="deployment_type._id === backlogproject.deploymenttype_id ">{{ deployment_type.name }}</div>
+                      </td>
+                      <td ng-repeat="field in vm.fields">
+                        <div ng-repeat="deploymentType in vm.deploymentTypes" ng-if="deploymentType._id === backlogproject.deploymenttype_id">{{ deploymentType[field.name] }}</div>
+                      </td>
+                      <td>
+                        <span class="input-group-btn">
+                          <a ui-sref="backlogprojects.edit({backlogprojectId: backlogproject._id})" type="button" class="btn btn-default btn-sm" target="_blank" title="Edit Backlog Project In Another Tab"><i class="glyphicon glyphicon-edit"></i></a>
+                          <a ng-click="vm.removeBacklogProjectFromPlan(pod, backlogproject)" type="button" class="btn btn-default btn-sm" title="Remove Backlog Project"><i class="glyphicon glyphicon-remove"></i></a>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr ng-repeat="project in vm.projects" ng-if="vm.isProjectInPodsPerPlanIds(pod,project)" ng-style="{'background-color': 'AntiqueWhite '}">
+                      <td><b>{{ project.name }}</b></td>
+                      <td><div ng-repeat="team in vm.teams" ng-if="team._id === project.team_id ">{{ team.name }}</div></td>
+                      <td>
+                        <div ng-repeat="deployment_type in vm.deploymentTypes" ng-if="deployment_type._id === project.deploymenttype_id ">{{ deployment_type.name }}</div>
+                      </td>
+                      <td ng-repeat="field in vm.fields">
+                        <div ng-repeat="deploymentType in vm.deploymentTypes" ng-if="deploymentType._id === project.deploymenttype_id">{{ deploymentType[field.name] }}</div>
+                      </td>
+                      <td>
+                        <span class="input-group-btn">
+                          <a ui-sref="projects.edit({projectId: project._id})" type="button" class="btn btn-default btn-sm" target="_blank" title="Edit Project In Another Tab"><i class="glyphicon glyphicon-edit"></i></a>
+                          <a ng-click="vm.removeProjectFromPerPlan(pod, project)" type="button" class="btn btn-default btn-sm" title="Remove Project"><i class="glyphicon glyphicon-remove"></i></a>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <label>Backlog Projects:</label>
+                <div class="input-group">
+                  <span class="form-group has-feedback">
+                    <select class="form-control" ng-model="vm.selectedBacklogProjectId" ng-options="backlogproject._id as backlogproject.name for backlogproject in vm.backlogprojects | filter:vm.isBacklogProjectNotInAPlan" required></select>
+                  </span>
+                  <span class="input-group-btn">
+                    <button ng-click="vm.addBacklogProject(vm.selectedBacklogProjectId, pod)" type="button" title="Add Backlog Project" class="btn btn-default btn-sm pull-right" ng-disabled="!vm.selectedBacklogProjectId"><i class="glyphicon glyphicon-plus"></i></button>
+                  </span>
+                </div>
+                <label>Per Plan Projects:</label>
+                <div class="input-group">
+                  <span class="form-group has-feedback">
+                    <select class="form-control" ng-model="vm.selectedPerPlanProject" ng-options="project as project.name for project in vm.projects | filter:vm.isProjectDeleted | filter:vm.isProjectNotInPerPlan" required></select>
+                  </span>
+                  <span class="input-group-btn">
+                    <button ng-click="vm.addPerPlanProject(vm.selectedPerPlanProject, pod)" type="button" title="Add Per Plan Project" class="btn btn-default btn-sm pull-right" ng-disabled="!vm.selectedPerPlanProject"><i class="glyphicon glyphicon-plus"></i></button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">{{ pod.name }} Resource Summary</div>
+              <div class="panel-body">
+                <div class="form-group has-feedback" ng-class="{ 'has-error': form.cpu_contention_ratio.$invalid, 'has-success': form.cpu_contention_ratio.$valid }">
+                  <label for="cpu_contention_ratio">CPU Contention Ratio</label>
+                  <input class="form-control" ng-style="{'background-color': pod['cpu_contention_ratio_original'] != pod['cpu_contention_ratio'] ? 'orange ' : ''}" title="Originally was {{ pod.cpu_contention_ratio_original }}" id="cpu_contention_ratio" name="cpu_contention_ratio" ng-model="pod.cpu_contention_ratio" ng-change="vm.populatePodCapacityForField(pod, 'cpu')" required/>
+                  <span class="help-block" ng-messages="form.cpu_contention_ratio.$error">
+                    <p ng-message="required">This field is required</p>
+                  </span>
+                </div>
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th ng-repeat="field in vm.fields">{{ field.title }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><b>Physical Capacity</b></td>
+                      <td ng-repeat="field in vm.fields">
+                        <div class="form-group has-feedback" ng-class="{ 'has-error': form['pod[field.name][{{$index}}]'].$invalid, 'has-success': form['pod[field.name][{{$index}}]'].$valid }">
+                          <input class="form-control" ng-style="{'background-color': pod[field.name + '_original'] != pod[field.name] ? 'orange ' : ''}" title="Originally was {{ pod[field.name + '_original'] }}" id="pod[field.name][{{$index}}]" name="pod[field.name][{{$index}}]" ng-model="pod[field.name]" ng-change="vm.changedPodPhysicalResourcesField(pod, field.name)" required />
+                        </div>
+                        <div ng-if="field.name === 'cpu'">{{ pod['cpu_after_contention_ratio'] }} <i class="ebIcon ebIcon_info" title="This value takes the CPU contention ratio into account i.e. {{ pod[field.name] }} x {{ pod.cpu_contention_ratio }} = {{ pod['cpu_after_contention_ratio'] }}"></i></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Total Required</b></td>
+                      <td ng-repeat="field in vm.fields">{{ pod.project_totals[field.name] }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Total Delta</b></td>
+                      <td ng-repeat="field in vm.fields" ng-class="{ 'alert alert-danger': pod.deltas[field.name] < 0 }">{{ pod.deltas[field.name] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </uib-tab>
+        </uib-tabset>
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">Resources Per Team Across All Clouds</div>
+      <div class="panel-body overflow_scroll">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th ng-repeat="deploymentType in vm.usedDeploymentTypes">{{ deploymentType }}</th>
+              <th ng-repeat="field in vm.fields">{{ field.title }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="team in vm.teamAllocations">
+              <td>{{ team.name }}</td>
+              <td ng-repeat="deploymentType in vm.usedDeploymentTypes">{{ team.deployment_type_counts[deploymentType] || 0 }}</td>
+              <td ng-repeat="field in vm.fields">{{ team[field.name] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit" ng-disabled="vm.formSubmitting">Save</button>
+  </form>
+</section>

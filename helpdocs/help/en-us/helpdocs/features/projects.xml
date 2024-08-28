@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<task id="projects">
+  <title>Projects</title>
+  <taskbody>
+    <context>
+      <p>
+        A project within the Capacity Planner is intended to be a representation of
+        a project within the associated cloud pod. It references the deployment type
+        that the user wishes to use this project for, as well as the team that will be
+        using it.
+      </p>
+      <p><b>Objective</b></p>
+      <p>Create a new project for the Capacity Planner</p>
+      <p>
+        <b>Outline</b>
+        <ol>
+          <li><xref href="#openProject">Open the Project View</xref></li>
+          <li><xref href="#createProject">Create New Project</xref>  </li>
+          <li><xref href="#enterDetails">Enter the Project Details</xref></li>
+          <li><xref href="#saveProject">Save Project</xref></li>
+        </ol>
+      </p>
+    </context>
+    <prereq>
+      <p>To create a new project the user must have the following:</p>
+      <ul>
+        <li>Associated Pod already created in the tool</li>
+        <li>Associated Team already created in the tool</li>
+        <li>Associated Deployment Type already created in the tool</li>
+      </ul>
+    </prereq>
+    <steps>
+      <step id="openProject">
+        <cmd>Open the Project View</cmd>
+        <info>
+          <p>Click the project view from the nav bar at the top.</p>
+        </info>
+      </step>
+      <step id="createProject">
+        <cmd>Create New Project</cmd>
+        <info>
+          <p>Click the <b>Create new project</b> button</p>
+        </info>
+      </step>
+      <step id="enterDetails">
+        <cmd>Enter the Project Details</cmd>
+        <info>
+          <p>Enter the details in the fields.</p>
+          <p><b>NOTE:</b> Restrictions on the fields are as follows: </p>
+          <ul>
+            <li>All fields are required</li>
+            <li><b>Name</b>Name must be unique within the selected Pod</li>
+            <li><b>Pod</b> must be an existing pod that the user has created</li>
+            <li><b>Team</b> must be an existing team that the user has already created</li>
+            <li><b>Deployment Type</b> must be an existing deployment type that that user has already created</li>
+            <li><b>CPU, Memory and Cinder Storage</b> must all be positive integers</li>
+          </ul>
+        </info>
+      </step>
+      <step id="saveProject">
+        <cmd>Save Project</cmd>
+        <info>
+          <p>
+            Click the <b>Save</b> button and you will be redirected back to the previous page
+            where you can see the newly created project as well as the pod it resides in
+            with new options to edit and delete that project.
+          </p>
+          <p><b>NOTE:</b> Project will not save if any fields are invalid (RED in UI)</p>
+        </info>
+      </step>
+    </steps>
+    <result>
+      <p>A New Project is created in the Capacity Planner.</p>
+    </result>
+  </taskbody>
+</task>

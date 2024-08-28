@@ -1,0 +1,35 @@
+<section>
+  <div class="page-header">
+    <h1>{{ vm.pageTitle }} '{{ vm.backlogproject.name }}'</h1>
+  </div>
+  <form name="form" ng-submit="vm.submitForm()">
+    <fieldset>
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.name.$invalid, 'has-success': form.name.$valid }">
+        <label for="name">Project Name</label>
+        <input class="form-control" type="text" id="name" name="name" placeholder="Name" ng-model="vm.backlogproject.name" autofocus required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.name.$invalid, 'glyphicon-ok': form.name.$valid }"></span>
+        <span class="help-block" ng-messages="form.name.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.team_select.$invalid, 'has-success': form.team_select.$valid }">
+        <label for="team_select">Team</label>
+        <select class="form-control" id="team_select" name="team_select" ng-model="vm.backlogproject.team_id" ng-options="team._id as team.name for team in vm.teams" required></select>
+        <span class="help-block" ng-messages="form.team_select.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.deploymenttype_select.$invalid, 'has-success': form.deploymenttype_select.$valid }">
+        <label for="deploymenttype_select">Deployment Type</label>
+        <select class="form-control" id="deploymenttype_select" name="deploymenttype_select" ng-model="vm.backlogproject.deploymenttype_id" ng-options="deploymentType._id as deploymentType.name for deploymentType in vm.deploymentTypes" required></select>
+        <span class="help-block" ng-messages="form.deploymenttype_select.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+    </fieldset>
+    <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid || vm.formSubmitting">Save</button>
+  </form>
+</section>

@@ -1,0 +1,199 @@
+{
+  "paths": {
+    "/pods": {
+      "get": {
+        "tags": [
+          "pods"
+        ],
+        "summary": "Returns a list of all pods.",
+        "description": "Returns a list of all pods. This can be filtered by using the ?q=<key>=<value> and filter= syntax on the API Call",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pod"
+              }
+            }
+          },
+          "422": {
+            "description": "Improperly structured query. Make sure to use ?q=<key>=<value> syntax"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post":{
+        "tags": [
+          "pods"
+        ],
+        "summary": "Create a new pod.",
+        "description": "Creates and returns a new pod.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pod object that represents your OpenStack Pod",
+            "required": true,
+            "schema":{
+              "$ref": "#/definitions/Pod"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created Pod successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pod"
+            }
+          },
+          "400": {
+            "description": "Possible Messages:\n* There was a syntax error found in your request, please make sure that it is valid and try again\n* {PATH} is not in schema and strict mode is set to throw\n* {PATH} is not valid, {VALUE} is not an integer\n* {PATH} is less than minimum allowed value (0)\n* {VALUE} is not correct. The {PATH} must be a valid url\n* {PATH} is required"
+          },
+          "422": {
+            "description": "Field already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pods/{podId}":{
+      "get":{
+        "tags": [
+          "pods"
+        ],
+        "summary": "Returns a pod.",
+        "description": "Returns a pod. This can be filtered by using the ?q=<key>=<value> and filter= syntax on the API Call",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"podId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the pod to retrieve",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Pod",
+            "schema": {
+              "$ref": "#/definitions/Pod"
+            }
+          },
+          "404":{
+            "description":"A pod with that id does not exist"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put":{
+        "tags": [
+          "pods"
+        ],
+        "summary": "Update a pod.",
+        "description": "Update a pod.",
+        "produces": [
+          "application/json"
+        ],
+        "consume": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"podId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the pod to update",
+              "type":"string"
+           },
+           {
+             "in": "body",
+             "name": "body",
+             "description": "Pod object that represents your OpenStack Pod<br>Partial update possible, not all fields in body required",
+             "required": true,
+             "schema":{
+               "$ref": "#/definitions/Pod"
+              }
+            }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Pod",
+            "schema": {
+              "$ref": "#/definitions/Pod"
+            }
+          },
+          "400": {
+            "description": "Possible Messages:\n* There was a syntax error found in your request, please make sure that it is valid and try again\n* {PATH} is not in schema and strict mode is set to throw\n* {PATH} is not valid, {VALUE} is not an integer\n* {PATH} is less than minimum allowed value (0)\n* {VALUE} is not correct. The {PATH} must be a valid url\n* {PATH} is required"
+          },
+          "404":{
+            "description":"A pod with that id does not exist"
+          },
+          "422": {
+            "description": "Field already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete":{
+        "tags": [
+          "pods"
+        ],
+        "summary": "Delete a pod.",
+        "description": "Delete a pod.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+           {
+              "name":"podId",
+              "in":"path",
+              "required":true,
+              "description":"The id of the pod to delete",
+              "type":"string"
+           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted Pod",
+            "schema": {
+              "$ref": "#/definitions/Pod"
+            }
+          },
+          "404":{
+            "description": "A pod with that id does not exist"
+          },
+          "422":{
+            "description": "Can't delete Pod, it has dependent projects"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

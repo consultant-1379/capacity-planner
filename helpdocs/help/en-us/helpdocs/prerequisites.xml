@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<concept id="Prerequisites">
+    <title>Prerequisites</title>
+    <conbody>
+        <section>
+            <title>Openstack Permissions</title>
+            <p>To use the Capacity Planner you must have a user with permissions in the cloud environment to do the following: </p>
+            <ul>
+                <li>list projects</li>
+                <li>show quotas</li>
+                <li>get hypervisor stats</li>
+                <li>get volume pool data</li>
+            </ul>
+            <p><b>Note:</b> These permissions are used by the data-importer that runs against the cloud to populate the Capacity Planner</p>
+        </section>
+        <section>
+            <title>Data Importer</title>
+            <p>To make use of the permissions made available by the above prerequisite, you must have a running data-importer to populate the capacity planner</p>
+          </section>
+    </conbody>
+</concept>

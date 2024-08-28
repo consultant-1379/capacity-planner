@@ -1,0 +1,120 @@
+<section>
+  <div class="page-header">
+    <h1>{{ vm.pageTitle }} '{{ vm.pod.name }}'</h1>
+  </div>
+  <form name="form" ng-submit="vm.submitForm()">
+    <fieldset>
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.name.$invalid, 'has-success': form.name.$valid }">
+        <label for="name">Name</label>
+        <input class="form-control" type="text" id="name" name="name" placeholder="Name" ng-model="vm.pod.name" ng-minlength="5" ng-maxlength="20" required autofocus>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.name.$invalid, 'glyphicon-ok': form.name.$valid }"></span>
+        <span class="help-block" ng-messages="form.name.$error">
+          <p ng-message="required">This field is required</p>
+          <p ng-message="minlength">This must be at least of length 5</p>
+          <p ng-message="maxlength">This must be at most of length 20</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.authUrl.$invalid, 'has-success': form.authUrl.$valid }">
+        <label for="authUrl">Authentication URL</label>
+        <input class="form-control" type="text" id="authUrl" name="authUrl" placeholder="Authentication URL" ng-model="vm.pod.authUrl" ng-pattern="vm.urlregex" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.authUrl.$invalid, 'glyphicon-ok': form.authUrl.$valid }"></span>
+        <span class="help-block" ng-messages="form.authUrl.$error">
+          <p ng-message="required">This field is required</p>
+          <p ng-message="pattern">This must be a url.</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.project.$invalid, 'has-success': form.project.$valid }">
+        <label for="project">Project</label>
+        <input class="form-control" type="text" id="project" name="project" placeholder="Project" ng-model="vm.pod.project" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.project.$invalid, 'glyphicon-ok': form.project.$valid }"></span>
+        <span class="help-block" ng-messages="form.project.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.username.$invalid, 'has-success': form.username.$valid }">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username" name="username" placeholder="Username" ng-model="vm.pod.username" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.username.$invalid, 'glyphicon-ok': form.username.$valid }"></span>
+        <span class="help-block" ng-messages="form.username.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.password.$invalid, 'has-success': form.password.$valid }">
+        <label for="password">Password</label>
+        <input class="form-control" type="text" id="password" name="password" placeholder="Password" ng-model="vm.pod.password" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.password.$invalid, 'glyphicon-ok': form.password.$valid }"></span>
+        <span class="help-block" ng-messages="form.password.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.cpu_contention_ratio.$invalid, 'has-success': form.cpu_contention_ratio.$valid }">
+        <label for="cpu_contention_ratio">CPU Contention Ratio</label>
+        <input class="form-control" type="number" min="0.01" step="0.01" id="cpu_contention_ratio" name="cpu_contention_ratio" placeholder="CPU Contention Ratio" ng-model="vm.pod.cpu_contention_ratio" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.cpu_contention_ratio.$invalid, 'glyphicon-ok': form.cpu_contention_ratio.$valid }"></span>
+        <span class="help-block" ng-messages="form.cpu_contention_ratio.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.cpu.$invalid, 'has-success': form.cpu.$valid }">
+        <label for="cpu">CPU</label>
+        <input class="form-control" type="number" min="0" id="cpu" name="cpu" placeholder="CPU" ng-model="vm.pod.cpu" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.cpu.$invalid, 'glyphicon-ok': form.cpu.$valid }"></span>
+        <span class="help-block" ng-messages="form.cpu.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.memory_mb.$invalid, 'has-success': form.memory_mb.$valid }">
+        <label for="memory_mb">Memory (MB)</label>
+        <input class="form-control" type="number" min="0" id="memory_mb" name="memory_mb" placeholder="Memory In MB" ng-model="vm.pod.memory_mb" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.memory_mb.$invalid, 'glyphicon-ok': form.memory_mb.$valid }"></span>
+        <span class="help-block" ng-messages="form.memory_mb.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.cinder_gb.$invalid, 'has-success': form.cinder_gb.$valid }">
+        <label for="cinder_gb">Cinder Storage (GB)</label>
+        <input class="form-control" type="number" min="0" id="cinder_gb" name="cinder_gb" placeholder="Cinder Storage In GB" ng-model="vm.pod.cinder_gb" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.cinder_gb.$invalid, 'glyphicon-ok': form.cinder_gb.$valid }"></span>
+        <span class="help-block" ng-messages="form.cinder_gb.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.cinder_iops.$invalid, 'has-success': form.cinder_iops.$valid }">
+        <label for="cinder_iops">Cinder IOPS</label>
+        <input class="form-control" type="number" min="0" id="cinder_iops" name="cinder_iops" placeholder="Cinder IOPS" ng-model="vm.pod.cinder_iops" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.cinder_iops.$invalid, 'glyphicon-ok': form.cinder_iops.$valid }"></span>
+        <span class="help-block" ng-messages="form.cinder_iops.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.enfs_gb.$invalid, 'has-success': form.enfs_gb.$valid }">
+        <label for="enfs_gb">ENFS Storage (GB)</label>
+        <input class="form-control" type="number" min="0" id="enfs_gb" name="enfs_gb" placeholder="ENFS Storage In GB" ng-model="vm.pod.enfs_gb" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.enfs_gb.$invalid, 'glyphicon-ok': form.enfs_gb.$valid }"></span>
+        <span class="help-block" ng-messages="form.enfs_gb.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error': form.enfs_iops.$invalid, 'has-success': form.enfs_iops.$valid }">
+        <label for="enfs_iops">ENFS IOPS</label>
+        <input class="form-control" type="number" min="0" id="enfs_iops" name="enfs_iops" placeholder="ENFS IOPS" ng-model="vm.pod.enfs_iops" required>
+        <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove': form.enfs_iops.$invalid, 'glyphicon-ok': form.enfs_iops.$valid }"></span>
+        <span class="help-block" ng-messages="form.enfs_iops.$error">
+          <p ng-message="required">This field is required</p>
+        </span>
+      </div>
+    </fieldset>
+    <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid || vm.formSubmitting">Save</button>
+  </form>
+</section>

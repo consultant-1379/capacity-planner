@@ -1,0 +1,69 @@
+<section>
+  <div class="page-header">
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+        <a class="btn btn-sm btn-primary" ui-sref="pods.edit({podId: vm.pod._id})">Edit</a>
+      </div>
+    </div>
+    <h1>Viewing pod '{{ vm.pod.name }}'</h1>
+  </div>
+  <form>
+    <fieldset disabled>
+      <div class="form-group">
+        <label>Name</label>
+        <p class="form-control-static">{{ vm.pod.name }}</p>
+      </div>
+      <div class="form-group">
+        <label>Authentication URL</label>
+        <p class="form-control-static">{{ vm.pod.authUrl }}</p>
+      </div>
+      <div class="form-group">
+        <label>Project</label>
+        <p class="form-control-static">{{ vm.pod.project }}</p>
+      </div>
+      <div class="form-group">
+        <label>Username</label>
+        <p class="form-control-static">{{ vm.pod.username }}</p>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <p class="form-control-static">{{ vm.pod.password }}</p>
+      </div>
+      <div class="form-group">
+        <label>CPU Contention Ratio</label>
+        <p class="form-control-static">{{ vm.pod.cpu_contention_ratio }}</p>
+      </div>
+      <div class="form-group">
+        <label>CPU</label>
+        <p class="form-control-static">{{ vm.pod.cpu }}</p>
+      </div>
+      <div class="form-group">
+        <label>Memory</label>
+        <p class="form-control-static">{{ vm.pod.memory_mb }} MB</p>
+      </div>
+      <div class="form-group">
+        <label>Cinder Storage</label>
+        <p class="form-control-static">{{ vm.pod.cinder_gb }} GB</p>
+      </div>
+      <div class="form-group">
+        <label>Cinder IOPS</label>
+        <p class="form-control-static">{{ vm.pod.cinder_iops }}</p>
+      </div>
+      <div class="form-group">
+        <label>ENFS Storage</label>
+        <p class="form-control-static">{{ vm.pod.enfs_gb }} GB</p>
+      </div>
+      <div class="form-group">
+        <label>ENFS IOPS</label>
+        <p class="form-control-static">{{ vm.pod.enfs_iops }}</p>
+      </div>
+      <div class="form-group">
+        <label>Dependent Projects</label>
+        <p ng-if="!vm.dependentProjects.length">None</p>
+        <p ng-repeat="dependentProject in vm.dependentProjects">
+          <a ui-sref="projects.view({projectId: dependentProject._id})">{{ dependentProject.name }}</a>
+        </p>
+      </div>
+    </fieldset>
+  </form>
+</section>
